@@ -130,7 +130,7 @@ int controller_loadFromText(char* path, LinkedList* pArrayListLibro, int* lastID
  * \return int
  *
  */
-int controller_editLibro(LinkedList* pArrayListLibro)
+int controller_editLibro(LinkedList* pArrayListLibro, eEditorial* listaEditorial, int sizeE)
 {
     eLibro* libro;
     int id, i, idAuxiliar;
@@ -138,7 +138,7 @@ int controller_editLibro(LinkedList* pArrayListLibro)
     int menu;
     char titulo[100];
     char autor[100];
-    int precio;
+    int precio, idEditorial;
 
     if(ll_len(pArrayListLibro) != 0)
     {
@@ -151,48 +151,70 @@ int controller_editLibro(LinkedList* pArrayListLibro)
 			if(libro != NULL && id == idAuxiliar)
 			{
 		    	printf("\n+--------------------------------------------------------------------------------------------------------------------------+\n");
-		    	printf("|%10s  %50s  %15s  %15s  %30s|\n","ID","TITULO","AUTOR","PRECIO","EDITORIAL");
+		    	printf("|%10s  %25s  %15s  %15s  %25s|\n","ID","TITULO","AUTOR","PRECIO","EDITORIAL");
 		    	printf("+---------------------------------------------------------------------------------------------------------------------------+\n");
 				libro_printLibro(pArrayListLibro, i);
 				switch(menu = Get_IntRange("\n\n------------------------------Menu de Modificaciones----------------------------------- \n\n"
 							  "1) Titulo\n"
 							  "2) Autor\n"
 							  "3) Precio\n"
-							  "4) Salir\n"
-							  "Opcion: ", "\nError, reingrese: ", 1, 4, 3))
+							  "4) Editorial\n"
+							  "5) Salir\n"
+							  "Opcion: ", "\nError, reingrese: ", 1, 5, 3))
 				{
 					case 1:
+					{
 						Get_OnlyAlphabetStringWithSpaces("\nIngrese Titulo: ", "\nError, reingrese: ", titulo, 100, 3);
 						libro_setTitulo(libro, titulo);
 						printf("\n--Titulo cambiado con exito--\n");
 				    	printf("\n+--------------------------------------------------------------------------------------------------------------------------+\n");
-				    	printf("|%10s  %50s  %15s  %15s  %30s|\n","ID","TITULO","AUTOR","PRECIO","EDITORIAL");
+				    	printf("|%10s  %25s  %15s  %15s  %25s|\n","ID","TITULO","AUTOR","PRECIO","EDITORIAL");
 				    	printf("+---------------------------------------------------------------------------------------------------------------------------+\n");
 						libro_printLibro(pArrayListLibro, i);
 						system("pause");
 						break;
+					}
 					case 2:
+					{
 						Get_OnlyAlphabetStringWithSpaces("\nIngrese Autor: ", "\nError, reingrese: ", autor, 100, 3);
 						libro_setAutor(libro, autor);
 						printf("\n--Autor cambiado con exito--\n");
 				    	printf("\n+--------------------------------------------------------------------------------------------------------------------------+\n");
-				    	printf("|%10s  %50s  %15s  %15s  %30s|\n","ID","TITULO","AUTOR","PRECIO","EDITORIAL");
+				    	printf("|%10s  %25s  %15s  %15s  %25s|\n","ID","TITULO","AUTOR","PRECIO","EDITORIAL");
 				    	printf("+---------------------------------------------------------------------------------------------------------------------------+\n");
 						libro_printLibro(pArrayListLibro, i);
 						system("pause");
 						break;
+					}
 					case 3:
+					{
 						precio = Get_IntRange("\nIngrese precio: ", "\nError, reingrese: ", 1, 999999, 3);
 						libro_setPrecio(libro, precio);
 						printf("\n--Precio cambiado con exito--\n");
 				    	printf("\n+--------------------------------------------------------------------------------------------------------------------------+\n");
-				    	printf("|%10s  %50s  %15s  %15s  %30s|\n","ID","TITULO","AUTOR","PRECIO","EDITORIAL");
+				    	printf("|%10s  %25s  %15s  %15s  %25s|\n","ID","TITULO","AUTOR","PRECIO","EDITORIAL");
 				    	printf("+---------------------------------------------------------------------------------------------------------------------------+\n");
 						libro_printLibro(pArrayListLibro, i);
 						system("pause");
 						break;
+					}
 					case 4:
+					{
+						printEditoriales(listaEditorial, sizeE);
+						idEditorial = Get_IntRange("\nIngrese id de la editorial: ", "\nError, reingrese: ", 1, 6, 3);
+						libro_setIdEditorial(libro, idEditorial);
+						printf("\n--Editorial cambiada con exito--\n");
+				    	printf("\n+--------------------------------------------------------------------------------------------------------------------------+\n");
+				    	printf("|%10s  %25s  %15s  %15s  %25s|\n","ID","TITULO","AUTOR","PRECIO","EDITORIAL");
+				    	printf("+---------------------------------------------------------------------------------------------------------------------------+\n");
+						libro_printLibro(pArrayListLibro, i);
+						system("pause");
 						break;
+					}
+					case 5:
+					{
+						break;
+					}
 				}
 				flag = 1;
 			}
@@ -532,7 +554,7 @@ int controller_applyDis(LinkedList* pArrayListLibro)
 	return retorno;
 }
 
-int controller_conterPorPrecio(LinkedList* pArrayListLibro)
+int controller_contarPorPrecio(LinkedList* pArrayListLibro)
 {
 	int retorno = -1;
 	int len;
@@ -544,14 +566,14 @@ int controller_conterPorPrecio(LinkedList* pArrayListLibro)
 		cantidad = ll_count(pArrayListLibro, libro_countPrecio);
 		if(cantidad>0){
 			printf("+----------------------------------------------+----+\n");
-			printf("| Cantidad de Libros con Precio mayor a $100 | %d |\n", cantidad);
+			printf("| Cantidad de Libros con Precio mayor a $500 | %d |\n", cantidad);
 			printf("+----------------------------------------------+----+\n");
 		}
 	}
 	return retorno;
 }
-
-int controller_conterPorEditorial(LinkedList* pArrayListLibro)
+/*
+int controller_contarPorEditorial(LinkedList* pArrayListLibro)
 {
 	int retorno = -1;
 	int len;
@@ -563,9 +585,10 @@ int controller_conterPorEditorial(LinkedList* pArrayListLibro)
 		cantidad = ll_count(pArrayListLibro, libro_countPrecio);
 		if(cantidad>0){
 			printf("+----------------------------------------------+----+\n");
-			printf("| Cantidad de Libros con Precio mayor a $100 | %d |\n", cantidad);
+			printf("| Cantidad de Libros con Precio mayor a $500 | %d |\n", cantidad);
 			printf("+----------------------------------------------+----+\n");
 		}
 	}
 	return retorno;
 }
+*/

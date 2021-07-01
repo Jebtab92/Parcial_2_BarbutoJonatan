@@ -388,6 +388,11 @@ int libro_OrdenarAutor(void* elementoA, void* elementoB)
     return Retorno;
 }
 
+/*
+ * \brief hardcodea la estructura eEditorial
+ * \param recibe un puntero a eEditorial y su size
+ * \return void
+ */
 void completarEditoriales(eEditorial* lista, int size)
 {
 	int i;
@@ -403,6 +408,11 @@ void completarEditoriales(eEditorial* lista, int size)
 	}
 }
 
+/*
+ * \brief imprime por pantalla las editoriales
+ * \param recibe un puntero a eEditorial y su size
+ * \return void
+ */
 void printEditoriales(eEditorial* lista, int size)
 {
 	int i;
@@ -413,6 +423,11 @@ void printEditoriales(eEditorial* lista, int size)
 	}
 }
 
+/*
+ * \brief Aplica descuento sobre el precio del libro
+ * \param recibe un puntero a void
+ * \return void
+ */
 void libro_aplicarDescuento(void* this)
 {
 	int aPrecio, aId;
@@ -462,6 +477,11 @@ void libro_aplicarDescuento(void* this)
 	}
 }
 
+/*
+ * \brief cuenta la cantidad de libros que hay con precio mayor a 500
+ * \param recibe un puntero a void
+ * \return int la cantidad contada
+ */
 int libro_countPrecio(void* libro)
 {
 	int retorno;
@@ -472,7 +492,7 @@ int libro_countPrecio(void* libro)
 	{
 		libro_getPrecio(auxLibro, &auxPrecio);
 
-		if(auxPrecio > 100)    // Aca se puede editar el precio
+		if(auxPrecio > 500)
 		{
 			retorno = 1;
 		}
@@ -485,7 +505,7 @@ int libro_countPrecio(void* libro)
 }
 
 // Falta esta funcion para q funcione
-
+/*
 int libro_countEditorial(void* libro)
 {
 	int retorno;
@@ -526,13 +546,4 @@ int libro_countEditorial(void* libro)
 	return retorno;
 }
 
-
-
-
-
-
-
-
-
-
-
+*/

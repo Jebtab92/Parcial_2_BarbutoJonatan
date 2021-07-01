@@ -15,10 +15,12 @@
 #include "Libro.h"
 #include "Biblioteca.h"
 
-int main(void) {
+int main(void)
+{
 	setbuf(stdout, NULL);
 	int menu;
 	int contadorID = 0;
+	int flagDesc = 0;
 	char ruta[50];
 	LinkedList* listaLibros = ll_newLinkedList();
 	eEditorial editoriales[6];
@@ -34,9 +36,12 @@ int main(void) {
 				  "3) Imprimir por pantalla \n"
 				  "4) Aplicar descuentos \n"
 				  "5) Guardar los datos de los libros en un archivo\n"
-				  "6) Salir \n"
+				  "6) Mostrar libros mayores a $500\n"
+				  "7) Eliminar libro\n"
+				  "8) Editar libro\n"
+				  "9) Salir\n"
 				  "--------------------------------------------------------------------------------\n\n"
-				  "Opcion: ", "\nError, reingrese: ", 1, 6, 3))
+				  "Opcion: ", "\nError, reingrese: ", 1, 9, 3))
 		{
 			case 1:
 			{
@@ -56,7 +61,15 @@ int main(void) {
 			}
 			case 4:
 			{
-				controller_applyDis(listaLibros);
+				if(flagDesc == 0)
+				{
+					controller_applyDis(listaLibros);
+				}
+				else
+				{
+					printf("\nDescuento ya aplicado");
+					system("pause");
+				}
 				break;
 			}
 			case 5:
@@ -66,9 +79,24 @@ int main(void) {
 			}
 			case 6:
 			{
+				controller_contarPorPrecio(listaLibros);
+				break;
+			}
+			case 7:
+			{
+				controller_removeLibro(listaLibros);
+				break;
+			}
+			case 8:
+			{
+				controller_editLibro(listaLibros, editoriales, 6);
+				break;
+			}
+			case 9:
+			{
 				break;
 			}
 		}
-	}while(menu != 6);
+	}while(menu != 9);
 	return 0;
 }

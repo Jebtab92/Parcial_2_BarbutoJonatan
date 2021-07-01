@@ -42,6 +42,9 @@ int libro_OrdenarTitulo(void* elementoA, void* elementoB);
 int libro_OrdenarAutor(void* elementoA, void* elementoB);
 int libro_getIdEditorial(eLibro* this, int* idEditorial);
 void completarEditoriales(eEditorial* lista, int size);
+void printEditoriales(eEditorial* lista, int size);
+int libro_countPrecio(void* libro);
+int libro_setIdEditorial(eLibro* this, int idEditorial);
 
 void libro_aplicarDescuento(void* this);
 int libro_buscarEditorial(int idEditorial, char* descripcion);
